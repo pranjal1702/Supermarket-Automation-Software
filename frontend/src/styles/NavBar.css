@@ -1,0 +1,12 @@
+a{
+    text-decoration: none;
+    color: white !important;
+    padding: 15px;
+    height: 5vh;
+}
+
+.logout-btn{
+    color: white !important;
+    margin-right: 2%;
+}
+

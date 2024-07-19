@@ -1,0 +1,46 @@
+/* AboutPage.css */
+.about-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa; /* Set a light background color */
+    border-radius: 10px; /* Add rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    margin-top: 20px;
+  }
+  
+  .about-page h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #343a40; /* Dark text color */
+  }
+  
+  .about-page h2 {
+    font-size: 24px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #495057; /* Darker text color */
+  }
+  
+  .about-page p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #6c757d; /* Text color slightly lighter than headings */
+  }
+  
+  .about-page ul {
+    list-style-type: disc;
+    margin-left: 20px;
+  }
+  
+  .about-page li {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  
+  /* Optional: Add hover effect to list items */
+  .about-page li:hover {
+    color: #007bff; /* Change color on hover */
+    cursor: pointer;
+  }
+  

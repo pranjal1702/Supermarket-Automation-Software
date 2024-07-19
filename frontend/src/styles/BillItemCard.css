@@ -1,0 +1,35 @@
+.bill-card-item{
+    width: 100%;
+    background-color: white;
+    height: 50px;
+    display: flex;
+    border-radius: 15px;
+    font-size: 20px;
+    align-items: center;
+    margin-top: 10px;
+}
+.dummy{
+    width: 100vw;
+}
+
+.code-para{
+    margin-left: 1vw;
+    width: 10%;
+}
+.qty-para{
+    width: 10%;
+}
+.name-para{
+    width: 40%;
+    
+}
+.price-para{
+    width: 15%;
+}
+.total-para{
+    width: 15%;
+}
+
+.remove-button{
+    width: 5%;
+}

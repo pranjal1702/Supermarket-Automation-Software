@@ -1,0 +1,34 @@
+.all-items{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0%;
+    align-items: center;
+}
+
+.search-box{
+    display: flex;
+    margin-top: 10px;
+    border-radius: 15px;
+    color: rgb(111, 106, 106);
+}
+
+.right-item{
+    /* align-self: flex-end;
+     */
+     margin-left: auto;
+     margin-right: 50px;
+     font-size: 25px;
+}
+
+.bill-btn{
+    margin-left: 5%;
+    font-size: 20px;
+    width: 20%;
+    border-radius: 10px;
+    background-color: #2E5C8A;
+    color: white;
+}
+
+.bill-btn:hover{
+    cursor: pointer;
+}

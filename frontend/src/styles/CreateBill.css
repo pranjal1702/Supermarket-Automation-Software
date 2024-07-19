@@ -1,0 +1,113 @@
+.main-container-create-bill{
+    display: flex;
+    margin: 0;
+    width: 100vw;
+    padding: 0;
+    height: 90vh;
+    background-color: white;
+}
+
+.left-container{
+    /* background-color: red; */
+    width: 35%;
+    height: 100%;
+    margin: 0;
+    background-color: #ddecfa;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.right-container{
+    width: 65%;
+    /* background-color: blue; */
+    height: 100%;
+    margin: 0;
+    background-color: #ddecfa;
+    overflow-y: auto;
+
+}
+.add-item{
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-top: 20vh;
+    border-radius: 15px;
+    background-color: white;
+    padding:5px
+}
+.bill-input{
+    margin: 5px;
+    font-size: 25px;
+    width: 9vw;
+    border-radius: 5px;
+}
+
+.add-btn{
+    font-size: 25px;
+    width: 10vw;
+    border-radius: 5px;
+    margin: 5px;
+    background-color: #2E5C8A;
+    color: white;
+    cursor: pointer;
+}
+
+.generate-bill{
+    margin-top: 15vh;
+    width: 20vw;
+    font-size: 25px;
+    border-radius: 5px;
+    background-color: #2E5C8A;
+    color: white;
+    cursor: pointer;
+
+}
+
+.item-element{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+
+.code-para{
+    margin-left: 1vw;
+    width: 10%;
+
+}
+.qty-para{
+    width: 15%;
+}
+.name-para{
+    width: 40%;
+    align-items: center;
+}
+.price-para{
+    width: 15%;
+}
+.total-para{
+    width: 15%;
+}
+
+.parameter-para{
+    display: flex;
+    width: 100%;
+    font-size: 20px;
+    align-items: center;
+
+}
+
+.customer-details{
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-top: 10vh;
+    border-radius: 15px;
+    background-color: white;
+    padding:5px
+}
+
+.customer-details-input{
+    font-size: 25px;
+    width: 14.5vw;
+    border-radius: 5px;
+    margin: 5px;
+
+}

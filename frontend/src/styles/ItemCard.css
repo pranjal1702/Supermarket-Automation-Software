@@ -1,0 +1,78 @@
+.card-item{
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    width: 100%;
+}
+.main-container{
+    width: 22%;
+    height: 60vh;
+    margin: 0%;
+    border-radius: 5px;
+    background-color: rgb(246, 246, 245);
+    margin-left: 2.5%;
+    margin-top: 20px;
+
+    padding: 3px;
+
+}
+/* .card-item:hover{
+    height: 100%;
+} */
+.main-container:hover{
+
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+}
+.card-media{
+
+    width: 99%;
+    height: 55%;
+
+}
+.card-prop{
+    background-color: rgb(117, 95, 95);
+}
+
+.text{
+    margin-left: 10px;
+}
+.update-buttons{
+    display: flex;
+    justify-content: space-around;
+}
+.btn{
+    /* margin-left: 15px;
+    margin-right: 15px; */
+    background-color: #2E5C8A;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    width: 40%;
+}
+
+.btn:hover{
+    cursor: pointer;
+}
+
+.billing{
+    display: flex;
+    width: 100%;
+}
+
+.qty{
+    width: 30%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
+
+.btn-stats{
+    background-color: #2E5C8A;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+    cursor: pointer;
+}

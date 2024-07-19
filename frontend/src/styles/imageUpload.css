@@ -1,0 +1,11 @@
+.preview-img{
+    height: 350px;
+    width: auto;
+}
+
+.image-container{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
