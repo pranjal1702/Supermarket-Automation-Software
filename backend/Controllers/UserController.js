@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 
 
 const createUser=async (req,res)=>{
-    const {username,fullName,password}=req.body;
+    const {username,fullName,password,email}=req.body;
     if(username==null||username==''||fullName==null||fullName==''||password==''||password==null){
         return res.status(400).send({message:"All required details not provided"})
     }
@@ -14,7 +14,7 @@ const createUser=async (req,res)=>{
             return res.status(409).send({message:"Username Already exist"});
         }
         const newUser=await UserModel.create({username:username,
-        fullName:fullName,password:password});
+        fullName:fullName,password:password,email:email});
         const token=generateToken(newUser._id);
        
         res.status(201).send({message:"User Signed up successfully",user:newUser,token:token});

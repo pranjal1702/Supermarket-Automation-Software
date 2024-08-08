@@ -18,6 +18,9 @@ const userSchema=new mongoose.Schema({
     isManager:{
         type:Boolean,
         default:false
+    },email:{
+        type: String,
+        default: ''
     }
 });
 

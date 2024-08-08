@@ -1,6 +1,8 @@
 const itemModel = require('../Models/ItemModel');
 const transacationModel = require('../Models/TransactionModel');
 const unitTransacationModel = require('../Models/UnitTransactionModel');
+const userModel = require('../Models/UserModel');
+const { sendEmail } = require('./EmailController');
 
 
 const addItemController=async (req,res)=>{
@@ -61,6 +63,13 @@ const increaseQuantity=async (req,res)=>{
 
 }
 
+const getManagerEmails = async()=>{
+    const managers = await userModel.find({isManager: true});
+    const emailList= managers.map((manager)=> manager.email);
+    const emailListString = emailList.join(', ');
+    return emailListString;
+}
+
 // for updating database when item purchased
 const decreaseQuantity=async (req,res)=>{
     // check whether name and code are right or not
@@ -84,6 +93,18 @@ const decreaseQuantity=async (req,res)=>{
         const newItem=await itemModel.updateOne({_id:item._id},{
             quantity:newQuantity
         })
+
+        // we have to find the list of  email of employees who are manager
+        if(item.quantity>10&&newQuantity<=10){
+            try{
+                const emailListString= await getManagerEmails();
+                sendEmail("Low stock alert for "+ item.name ,"Only "+newQuantity+" item remaining!!",emailListString);
+            }catch{
+                console.log("Some error occured\n");
+            }
+        }
+        
+
         return res.status(200).send(newItem);
     }catch(err){
         return res.status(502).send(err);

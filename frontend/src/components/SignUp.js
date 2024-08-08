@@ -34,6 +34,7 @@ export default function SignUpSide() {
       username:data.get("username"),
       fullName:data.get("fullName"),
       password:data.get("password"),
+      email: data.get("email")
     }
     console.log(reqData);
     try{
@@ -104,6 +105,18 @@ export default function SignUpSide() {
                 autoComplete="fullName"
                 autoFocus
               />
+
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email"
+                name="email"
+                autoComplete="Email"
+                autoFocus
+              />
+
               <TextField
                 margin="normal"
                 required
