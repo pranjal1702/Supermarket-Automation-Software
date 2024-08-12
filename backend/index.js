@@ -11,12 +11,15 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 const cors=require('cors');
 const userRoutes=require('./Routes/UserRoutes');
 const productRoutes=require('./Routes/ProductRoutes');
+const NotificationRoutes=require('./Routes/NotificationRoutes');
 //
+// 
 app.use(cors());
 app.use(express.json());
 
 app.use('/user',userRoutes);
 app.use('/product',productRoutes);
+app.use('/notification',NotificationRoutes);
 app.get('/',(req,res)=>{
     console.log("abc");
     res.send("Hello");

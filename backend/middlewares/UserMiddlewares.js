@@ -22,7 +22,7 @@ const verifyToken = async (req,res,next) => {
 }
 
 const clerk = async (req, res, next) => {
-    console.log(req.user);
+    // console.log(req.user);
     if (req.user.isManager) {
         return res.status(401).json({
             message:"Access Denied"
@@ -32,7 +32,7 @@ const clerk = async (req, res, next) => {
 }
 
 const manager=async(req,res,next)=>{
-    console.log(req.user.username);
+    // console.log(req.user.username);
     if(!req.user.isManager){
         return res.status(401).json({
             message:"Access Denied"

@@ -3,6 +3,7 @@ const transacationModel = require('../Models/TransactionModel');
 const unitTransacationModel = require('../Models/UnitTransactionModel');
 const userModel = require('../Models/UserModel');
 const { sendEmail } = require('./EmailController');
+const { addNotification } = require('./NotificationController');
 
 
 const addItemController=async (req,res)=>{
@@ -70,6 +71,20 @@ const getManagerEmails = async()=>{
     return emailListString;
 }
 
+// for sending notification to managers
+const addNotificationToAllManagers = async(message)=>{
+    try{
+        const managers = await userModel.find({isManager: true});
+        const userNames= managers.map((manager)=> manager.username);
+        
+        userNames.forEach((manager)=>{
+            addNotification(manager,message);
+        })
+    }catch(err){
+        console.log(err);
+    }
+}
+
 // for updating database when item purchased
 const decreaseQuantity=async (req,res)=>{
     // check whether name and code are right or not
@@ -98,7 +113,10 @@ const decreaseQuantity=async (req,res)=>{
         if(item.quantity>10&&newQuantity<=10){
             try{
                 const emailListString= await getManagerEmails();
-                sendEmail("Low stock alert for "+ item.name ,"Only "+newQuantity+" item remaining!!",emailListString);
+                const message=`Item Name: ${item.name}\nItem Code: ${item.code}\nStock Left: ${newQuantity}`;
+                sendEmail("Low stock alert for "+ item.name ,message,emailListString);
+               
+                await addNotificationToAllManagers(message);
             }catch{
                 console.log("Some error occured\n");
             }
