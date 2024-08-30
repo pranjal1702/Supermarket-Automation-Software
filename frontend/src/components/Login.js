@@ -16,6 +16,7 @@ import img from '../images/img1.jpg'
 import { useSnackbar } from './SnackbarContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { BASEURL } from './config';
 
 function Copyright(props) {
   return (
@@ -48,7 +49,8 @@ export default function SignInSide() {
     }
     console.log(reqData);
       try{
-        const res=await axios.post("http://localhost:8000/user/login-user",reqData);
+        const loginUserURL=BASEURL+"user/login-user";
+        const res=await axios.post(loginUserURL,reqData);
         showSnackbar("Welcome back "+res.data.user.username+"!!","success");
         localStorage.setItem("token",res.data.token);
         console.log(res.data.user);

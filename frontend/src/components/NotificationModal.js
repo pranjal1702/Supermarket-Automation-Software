@@ -5,6 +5,7 @@ import { Accordion, AccordionSummary, Box, Typography, AccordionDetails } from '
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import NotificationCard from './NotificationCard';
 import axios from 'axios';
+import { BASEURL } from './config';
 
 
 const style = {
@@ -42,8 +43,9 @@ export default function NotificationModal({openNotification,setOpenNotification}
   React.useEffect( ()=>{
     const fetchAndStoreData=async ()=>{
       try{
+        const getAllNotificationsURL=BASEURL+"notification/get-all-notifications";
         const token=localStorage.getItem("token");
-        const items=await axios.get("http://localhost:8000/notification/get-all-notifications",{ 
+        const items=await axios.get(getAllNotificationsURL,{ 
           headers:{
             'Authorization': `Bearer ${token}`
           }

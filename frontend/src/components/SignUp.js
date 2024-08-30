@@ -16,6 +16,7 @@ import img from '../images/img1.jpg'
 import axios from 'axios';
 import { useSnackbar } from './SnackbarContext';
 import { useNavigate } from "react-router-dom";
+import { BASEURL } from './config';
 
 
 
@@ -38,7 +39,8 @@ export default function SignUpSide() {
     }
     console.log(reqData);
     try{
-      const res=await axios.post("http://localhost:8000/user/create-user",reqData);
+      const createUserURL = BASEURL+"user/create-user";
+      const res=await axios.post(createUserURL,reqData);
       showSnackbar("Signed Up Successfully","success");
       localStorage.setItem("token",res.data.token);
       localStorage.setItem("user",JSON.stringify(res.data.user));

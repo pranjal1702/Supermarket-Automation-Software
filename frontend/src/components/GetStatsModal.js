@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useSnackbar } from './SnackbarContext';
 import '../styles/GetStatsModal.css'
 import { PieChart } from '@mui/x-charts/PieChart';
+import { BASEURL } from './config';
 
 
 
@@ -48,7 +49,8 @@ export default function GetStatsModal({props}) {
         }
         try{
           const token=localStorage.getItem("token");
-            const res=await axios.get("http://localhost:8000/product/get-stats-code",{
+          const getStatsByCodeURL = BASEURL+"product/get-stats-code";
+            const res=await axios.get(getStatsByCodeURL,{
               params:{
                 code:props.code,
                 startDate:startDate,
@@ -59,7 +61,8 @@ export default function GetStatsModal({props}) {
               }
             }
             );
-            const totalRes=await axios.get("http://localhost:8000/product/get-total-stats",{
+            const getTotalStatsURL = BASEURL+"product/get-total-stats";
+            const totalRes=await axios.get(getTotalStatsURL,{
               params:{
                 startDate:startDate,
                 endDate:endDate
@@ -93,7 +96,8 @@ export default function GetStatsModal({props}) {
         const fetchData = async () => {
           try {
             const token=localStorage.getItem("token");
-            const res = await axios.get("http://localhost:8000/product/get-itemByCode", {
+            const getItemByCodeURL=BASEURL+"product/get-itemByCode";
+            const res = await axios.get(getItemByCodeURL, {
               params: {
                 code: props.code
               },

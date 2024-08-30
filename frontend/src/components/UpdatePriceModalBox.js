@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
 import { useSnackbar } from './SnackbarContext';
+import { BASEURL } from './config';
 
 export default function UpdatePriceModalBox({props}) {
     const {showSnackbar}=useSnackbar();
@@ -33,7 +34,8 @@ export default function UpdatePriceModalBox({props}) {
         }
         try{
           const token=localStorage.getItem("token");
-          const res=await axios.post("http://localhost:8000/product/update-price",{
+          const updatePriceURL=BASEURL+"product/update-price";
+          const res=await axios.post(updatePriceURL,{
             code:props.code,
             newPrice:newPrice
           },{

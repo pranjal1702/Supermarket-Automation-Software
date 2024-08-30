@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BASEURL } from "./config";
 
 const { Box, Button } = require("@mui/material")
 
@@ -7,8 +8,9 @@ export default function NotificationCard(props){
     const onReadClick=async()=>{
         // console.log(props);
         try{
+            const changeNotificationStatURL = BASEURL+"notification/change-notification-status";
             const token=localStorage.getItem("token");
-            const res=await axios.post("http://localhost:8000/notification/change-notification-status",{
+            const res=await axios.post(changeNotificationStatURL,{
               id:notification._id,
             },{
               headers:{

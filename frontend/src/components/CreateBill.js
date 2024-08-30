@@ -5,6 +5,7 @@ import axios from 'axios';
 import 'jspdf-autotable';
 import { useSnackbar } from './SnackbarContext';
 import { useNavigate } from 'react-router-dom';
+import { BASEURL } from './config';
 
 
 
@@ -41,8 +42,9 @@ export default function CreateBill() {
     }
     // check whether code is valid or not
     try{
+      const getItemByCodeURL=BASEURL+"product/get-itemByCode";
       const token=localStorage.getItem("token");
-      const res=await axios.get("http://localhost:8000/product/get-itemByCode",{        
+      const res=await axios.get(getItemByCodeURL,{        
         params: { code: code },
         headers:{
           'Authorization': `Bearer ${token}`
@@ -101,7 +103,8 @@ export default function CreateBill() {
 
           try{
             const token=localStorage.getItem("token");
-            const res= await axios.post("http://localhost:8000/product/create-transaction",{billItems:billItems,customerName:customerName,customerPhone:customerPhone},{
+            const createTransactionURL=BASEURL+"product/create-transaction";
+            const res= await axios.post(createTransactionURL,{billItems:billItems,customerName:customerName,customerPhone:customerPhone},{
               headers:{
                 'Authorization': `Bearer ${token}`
               }
@@ -116,8 +119,9 @@ export default function CreateBill() {
            // decrease the qty present
            try{
             const token=localStorage.getItem("token");
+            const decreaseQTYURL = BASEURL+"product/decrease-quantity";
             for(let item of billItems){
-              const res=await axios.post("http://localhost:8000/product/decrease-quantity",{code:item.code,quantity:item.qty},{
+              const res=await axios.post(decreaseQTYURL,{code:item.code,quantity:item.qty},{
                 headers:{
                   'Authorization': `Bearer ${token}`
                 }
@@ -183,7 +187,7 @@ export default function CreateBill() {
     const printableContent = `
       <p>Bill Details</p>
       <div class='header'>
-        <h1>ABC Markets</h1>
+        <h1>UniMART</h1>
         <div class="contact-info">
           <p>Dhanbad Jharkhand</p>
           <p>9795xxxxx</p>

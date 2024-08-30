@@ -25,14 +25,19 @@ app.get('/',(req,res)=>{
     res.send("Hello");
 })
 
-// connecting to database
-try{
-    mongoose.connect("mongodb://127.0.0.1:27017/supermarket");
-    console.log("Connected to database");
-}catch(err){
-    console.log("Connection to mongodb failed : "+err);
+async function connectDB() {
+    try {
+        await mongoose.connect(process.env.MONGO_URL);
+        console.log("Connected to the database");
+    } catch (err) {
+        console.log("Connection to MongoDB failed:", err);
+    }
 }
 
-app.listen(8000,()=>{
-    console.log("Listening on Port 8000");
+connectDB();
+
+const PORT = process.env.PORT || 4000;
+
+app.listen(PORT,()=>{
+    console.log("Listening on Port "+PORT);
 });

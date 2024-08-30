@@ -12,6 +12,7 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import { useSnackbar } from './SnackbarContext'
 import { useNavigate } from 'react-router-dom'
+import { BASEURL } from './config'
 
 
 
@@ -63,9 +64,10 @@ export default function AllItems() {
 
     const fetchAndStoreData=async ()=>{
       try{
+        const getItemsURL=BASEURL+"product/get-items";
         const token=localStorage.getItem("token");
         console.log(searchText);
-        const items=await axios.get("http://localhost:8000/product/get-items",{ 
+        const items=await axios.get(getItemsURL,{ 
           params: { txt: searchText },
           headers:{
             'Authorization': `Bearer ${token}`
@@ -125,8 +127,9 @@ export default function AllItems() {
       return;
     }
     try{
+      const addItemURL= BASEURL+"product/add-item";
       const token=localStorage.getItem("token");
-      const res=await axios.post("http://localhost:8000/product/add-item",
+      const res=await axios.post(addItemURL,
       {
         name:newItemName,
         code:parseInt(newItemCode) ,
