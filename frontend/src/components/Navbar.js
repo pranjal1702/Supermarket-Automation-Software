@@ -13,16 +13,20 @@ import { useSnackbar } from './SnackbarContext';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import NotificationModal from './NotificationModal';
 import { Link } from 'react-router-dom';
+import { Avatar } from '@mui/material';
+import ProfileDrawer from './ProfileDrawer';
 
 export default function Navbar() {
+  const [openProfile, setOpenProfile] = React.useState(false);
   const navigate=useNavigate();
   const {showSnackbar}=useSnackbar();
   const [isManager,setIsManager]=React.useState(false);
-
+  const [username,setUsername]=React.useState(" ");
   const [openNotification,setOpenNotification] = React.useState(false);
 
   React.useEffect(()=>{
      if(localStorage.getItem("user")!=null){
+      setUsername(JSON.parse(localStorage.getItem('user')).username)
       setIsManager(JSON.parse(localStorage.getItem('user')).isManager);
      }
   },[]);
@@ -75,6 +79,9 @@ export default function Navbar() {
 
       <div style={{display:'flex',flexDirection:'row',alignItems:'center'
       }}>
+        <IconButton onClick={() => setOpenProfile(true)}>
+          <Avatar>{username[0]}</Avatar>
+        </IconButton>
         <IconButton className='logout-btn' onClick={()=>setOpenNotification(true)}>
           <NotificationsActiveIcon/>
         </IconButton>
@@ -84,6 +91,7 @@ export default function Navbar() {
         </IconButton>
       </div>
     </AppBar>
+    <ProfileDrawer openProfile={openProfile} setOpenProfile={setOpenProfile} />
   </Box>
   )
 }

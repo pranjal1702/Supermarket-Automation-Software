@@ -59,7 +59,6 @@ const getAllUsers = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-    console.log(req);
   try {
     const { id } = req.params;
 
@@ -80,5 +79,27 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports={createUser,loginUser,getAllUsers,deleteUser};
+const updatePassword = async (req, res) => {
+  const userId = req.user.id; // assuming middleware added req.user
+  const { oldPassword, newPassword } = req.body;
+
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user)
+      return res.status(404).json({ message: 'User not found' });
+
+    const isMatch = await bcrypt.compare(oldPassword, user.password);
+    if (!isMatch)
+      return res.status(400).json({ message: 'Old password is incorrect' });
+
+    user.password = newPassword;  // hashing done by mongoose
+    await user.save();
+
+    return res.status(200).json({ message: 'Password updated successfully' });
+  } catch (err) {
+    return res.status(500).json({ message: 'Server error', error: err.message });
+  }
+};
+
+module.exports={createUser,loginUser,getAllUsers,deleteUser,updatePassword};
 

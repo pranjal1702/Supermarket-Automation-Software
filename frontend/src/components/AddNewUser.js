@@ -45,7 +45,12 @@ const AddNewUser = () => {
     console.log(reqData);
     try{
       const createUserURL = BASEURL+"user/create-user";
-      const res=await axios.post(createUserURL,reqData);
+      const token=localStorage.getItem("token");
+      const res=await axios.post(createUserURL,reqData,{
+            headers:{
+              'Authorization': `Bearer ${token}`
+            }
+          });
       showSnackbar("New created successfully","success");
     }catch(err){
       showSnackbar(err.response.data.message,"error");

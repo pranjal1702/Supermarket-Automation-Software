@@ -73,8 +73,6 @@ export default function AllItems() {
         });
         
          setAllItem(items.data);
-        // console.log(items.data);
-        // console.log(allItems);
       }catch(err){
         console.log(err);
       }
