@@ -1,12 +1,10 @@
 import React from 'react'
-import dummyImage from '../images/uploadImg.jpg'
 import ItemCard from './ItemCard'
 import '../styles/AllItems.css'
 import { useState ,useEffect} from 'react'
 import axios from 'axios'
 
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';

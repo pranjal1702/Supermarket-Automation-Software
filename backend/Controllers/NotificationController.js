@@ -9,8 +9,9 @@ const addNotification = async (user, message)=>{
 }
 
 const getNotifications =async (req,res)=>{
-    const username=req.user.username;
+    
     try{
+        const username=req.user.username;
         const allNotifications = await NotificationModel.find({username:username});
         return res.status(200).send(allNotifications);
     }catch(err){

@@ -44,6 +44,17 @@ export default function Navbar() {
               All Items
           </Typography>
           </a>)}
+        {isManager&& (<a href='/app/add-user'>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              Add User
+          </Typography>
+          </a>)}
+
+          {isManager&& (<a href='/app/manage-users'>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              Manage users
+          </Typography>
+          </a>)}
 
           {isManager||(<a href='/app/generate-bill'>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>

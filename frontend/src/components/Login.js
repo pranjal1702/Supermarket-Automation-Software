@@ -17,6 +17,7 @@ import { useSnackbar } from './SnackbarContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { BASEURL } from './config';
+import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 
 function Copyright(props) {
   return (
@@ -40,6 +41,7 @@ const defaultTheme = createTheme();
 export default function SignInSide() {
   const navigate=useNavigate();
   const {showSnackbar}=useSnackbar();
+  const [role, setRole] = React.useState('manager');
   const handleSubmit =async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -53,17 +55,17 @@ export default function SignInSide() {
         const res=await axios.post(loginUserURL,reqData);
         showSnackbar("Welcome back "+res.data.user.username+"!!","success");
         localStorage.setItem("token",res.data.token);
-        console.log(res.data.user);
         localStorage.setItem("user",JSON.stringify(res.data.user));
-        if(res.data.user.isManager) navigate('/app/all-items');
-        else navigate('/app/generate-bill');
+        if(res.data.user.isManager && role=='manager') navigate('/app/all-items');
+        else if(!res.data.user.isManager && role=='clerk') navigate('/app/generate-bill');
+        else{
+          showSnackbar("No such user for this role","error");
+        }
         
       }catch(err){
         // console.log(err.response.data)
         showSnackbar(err.response.data.message,"error");
       }
-
-   
   };
 
   return (
@@ -94,6 +96,23 @@ export default function SignInSide() {
               alignItems: 'center',
             }}
           >
+
+            <ToggleButtonGroup
+              value={role}
+              color='primary'
+              exclusive
+              onChange={(event, newRole)=>{if (newRole !== null) setRole(newRole);}}
+              aria-label="user role"
+              sx={{ mb: 2 }}
+            >
+              <ToggleButton value="manager" aria-label="admin">
+                Admin
+              </ToggleButton>
+              <ToggleButton value="clerk" aria-label="cashier">
+                Cashier
+              </ToggleButton>
+            </ToggleButtonGroup>
+
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
               <LockOutlinedIcon />
             </Avatar>
@@ -109,7 +128,7 @@ export default function SignInSide() {
                 id="username"
                 label="Username"
                 name="username"
-                autoComplete="username"
+                autoComplete="off"
                 autoFocus
               />
               <TextField
@@ -120,7 +139,7 @@ export default function SignInSide() {
                 id="password"
                 label="Password"
                 name="password"
-                autoComplete="Password"
+                autoComplete="new-password"
                 autoFocus
               />
               <Button
@@ -131,14 +150,6 @@ export default function SignInSide() {
               >
                 Sign In
               </Button>
-              <Grid container>
-                <Grid item>
-                  <Link href="signup" variant="body2" id='link-alt'  sx={{ color: 'blue' }} >
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid>
-              {/* <Copyright sx={{ mt: 5 }} /> */}
             </Box>
           </Box>
         </Grid>

@@ -4,8 +4,8 @@ const bcrypt = require("bcryptjs");
 
 
 const createUser=async (req,res)=>{
-    const {username,fullName,password,email}=req.body;
-    if(username==null||username==''||fullName==null||fullName==''||password==''||password==null){
+    const {username,fullName,password,email,isManager}=req.body;
+    if(username==null||username==''||fullName==null||fullName==''||password==''||password==null||isManager==null){
         return res.status(400).send({message:"All required details not provided"})
     }
     try{
@@ -14,7 +14,7 @@ const createUser=async (req,res)=>{
             return res.status(409).send({message:"Username Already exist"});
         }
         const newUser=await UserModel.create({username:username,
-        fullName:fullName,password:password,email:email});
+        fullName:fullName,password:password,email:email,isManager:isManager});
         const token=generateToken(newUser._id);
        
         res.status(201).send({message:"User Signed up successfully",user:newUser,token:token});
@@ -46,5 +46,39 @@ const loginUser=async (req,res)=>{
     }
 }
 
-module.exports={createUser,loginUser};
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await UserModel.find({}); // Fetch all users from the database
+    if (!users || users.length === 0) {
+      return res.status(404).send({ message: "No users found." });
+    }
+    return res.status(200).send({ users });
+  } catch (err) {
+    return res.status(500).send({ message: "Internal server error" });
+  }
+};
+
+const deleteUser = async (req, res) => {
+    console.log(req);
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).send({ message: "User ID is required to delete a user." });
+    }
+
+    const deletedUser = await UserModel.findByIdAndDelete(id);
+
+    if (!deletedUser) {
+      return res.status(404).send({ message: "User not found." });
+    }
+
+    return res.status(200).send({ message: "User deleted successfully.", user: deletedUser });
+  } catch (err) {
+    console.error("Error deleting user:", err);
+    return res.status(500).send({ message: "Internal server error" });
+  }
+};
+
+module.exports={createUser,loginUser,getAllUsers,deleteUser};
 
