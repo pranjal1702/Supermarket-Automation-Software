@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from './SnackbarContext';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import NotificationModal from './NotificationModal';
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
   const navigate=useNavigate();
@@ -39,35 +40,35 @@ export default function Navbar() {
     <AppBar position="static" sx={{backgroundColor:'#2E5C8A',display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
       <div>
         <Toolbar>
-        {isManager&& (<a href='/app/all-items'>
+        {isManager&& (<Link to='/app/all-items'>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               All Items
           </Typography>
-          </a>)}
-        {isManager&& (<a href='/app/add-user'>
+          </Link>)}
+        {isManager&& (<Link to='/app/add-user'>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Add User
           </Typography>
-          </a>)}
+          </Link>)}
 
-          {isManager&& (<a href='/app/manage-users'>
+          {isManager&& (<Link to='/app/manage-users'>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Manage users
           </Typography>
-          </a>)}
+          </Link>)}
 
-          {isManager||(<a href='/app/generate-bill'>
+          {isManager||(<Link to='/app/generate-bill'>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Billing
           </Typography>
-          </a>)}
+          </Link>)}
 
 
-          <a href='/app/about'>
+          <Link to='/app/about'>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               About
           </Typography>
-          </a>
+          </Link>
 
         </Toolbar>
       </div>
